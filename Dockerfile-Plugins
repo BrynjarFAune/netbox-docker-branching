@@ -1,0 +1,6 @@
+FROM quay.io/netboxcommunity/netbox:v4.1
+
+COPY configuration/plugins.py /etc/netbox/config/plugins.py
+COPY local_settings.py /opt/netbox/netbox/netbox/local_settings.py
+RUN /opt/netbox/venv/bin/pip install netboxlabs-netbox-branching
+RUN SECRET_KEY="dummydummydummydummydummydummydummydummydummydummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
